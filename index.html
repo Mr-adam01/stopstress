@@ -1,0 +1,294 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Stop Stress</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout : une colonne calme ; la liste d'exercices, puis un lecteur plein écran avec un cercle qui respire. */
+:root{
+  --bg:#e4f6f4; --bg2:#e3eefc; --surface:#ffffff; --line:#bde3de; --fg:#0e2d38; --muted:#3b6270;
+  --accent:#007a75; --accent-soft:#bff1e8; --glow:#2fd3c6; --glow2:#5fb4ff;
+  --logo-ink:#0a5c63; --logo-light:#ff9a3d;
+  --display:"Newsreader", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#07212a; --bg2:#0a1d33; --surface:#0d2f39; --line:#1b4a55; --fg:#e4fbf7; --muted:#9cc6c8;
+  --accent:#3fe2d0; --accent-soft:#0f4f4d; --glow:#1fb8ae; --glow2:#2f7fd6; --logo-ink:#e4fbf7; --logo-light:#ffad5c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#07212a; --bg2:#0a1d33; --surface:#0d2f39; --line:#1b4a55; --fg:#e4fbf7; --muted:#9cc6c8;
+  --accent:#3fe2d0; --accent-soft:#0f4f4d; --glow:#1fb8ae; --glow2:#2f7fd6; --logo-ink:#e4fbf7; --logo-light:#ffad5c; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg) linear-gradient(170deg,var(--bg) 0%,var(--bg2) 100%) fixed;color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 48px;display:flex;flex-direction:column;gap:32px}
+header h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,7vw,3.4rem);line-height:1.05;margin:0;letter-spacing:-.01em}
+header .logo{display:block;width:min(100%,380px);height:auto}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+header p{color:var(--muted);margin:10px 0 0;max-width:52ch}
+.quick{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.quick span{flex:1 1 220px;min-width:0}
+.quick strong{font-weight:600}
+.group h2{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:600;margin:0 0 12px}
+.list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.ex{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:14px;background:var(--surface);border:1px solid var(--line);transition:border-color .2s, transform .2s}
+.ex:hover{border-color:var(--accent);box-shadow:0 6px 20px color-mix(in srgb,var(--glow) 22%,transparent);transform:translateY(-1px)}
+.ex:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ex .t{font-family:var(--display);font-size:1.35rem;line-height:1.2}
+.ex .d{color:var(--muted);font-size:.93rem}
+.ex .m{font-size:.8rem;color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums;margin-top:auto;padding-top:4px}
+.btn{font:inherit;font-weight:600;border:none;border-radius:999px;padding:10px 18px;cursor:pointer;background:var(--accent);color:var(--bg)}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:18px}
+
+/* Lecteur */
+#player{position:fixed;inset:0;background:var(--bg) linear-gradient(170deg,var(--bg) 0%,var(--bg2) 100%);z-index:20;display:flex;flex-direction:column;
+  padding-top:calc(16px + env(safe-area-inset-top,0px));padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.ptop{display:flex;justify-content:space-between;align-items:center;gap:12px;max-width:720px;width:100%;margin:0 auto}
+.ptop h2{font-family:var(--display);font-weight:400;font-size:1.3rem;margin:0}
+.stage{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;min-height:0;text-align:center}
+.orb{width:min(62vw,300px);aspect-ratio:1;max-width:100%;position:relative;display:grid;place-items:center}
+.orb .ring{position:absolute;inset:0;border-radius:50%;border:1px dashed var(--line)}
+.orb .core{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 38% 32%,var(--accent-soft) 0%,var(--glow) 55%,var(--glow2) 100%);transform:scale(.45);box-shadow:0 0 70px var(--glow),0 0 140px color-mix(in srgb,var(--glow2) 45%,transparent)}
+.orb .num{position:relative;font-family:var(--display);font-size:3rem;font-variant-numeric:tabular-nums;color:var(--fg)}
+.phase{font-family:var(--display);font-size:clamp(1.6rem,5vw,2.2rem);margin:0;min-height:1.3em}
+.sub{color:var(--muted);max-width:44ch;margin:-14px auto 0;min-height:3em}
+.bar{width:min(320px,100%);height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent)}
+.controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.durs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.durs button{font:inherit;font-size:.9rem;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;font-variant-numeric:tabular-nums}
+.durs button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+[hidden]{display:none!important}
+.stage{overflow-y:auto;padding-block:8px}
+.stage>*{flex-shrink:0}
+.bar.seek{height:8px;cursor:pointer}
+.sub{min-height:4.8em;transition:color .4s}
+.sub.cue{color:var(--fg);font-size:1.05rem}
+.chaps{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:560px}
+.chaps button{font:inherit;font-size:.85rem;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.chaps button b{font-variant-numeric:tabular-nums;font-weight:600;margin-right:6px}
+.chaps button[aria-current="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--fg)}
+.chaps button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.done{display:flex;flex-direction:column;gap:12px;align-items:center}
+@media (prefers-reduced-motion: reduce){.ex{transition:none}.orb .core{box-shadow:none}}
+</style>
+
+<div class="wrap" id="home">
+  <header>
+    <h1><span class="vh">Stop Stress</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 378 72" class="logo" aria-hidden="true" focusable="false" role="img" aria-label="STOP STRESS"><g transform="translate(4 4)"><path d="M32 56C20 54 9 44 8 26C19 28 29 38 32 56Z" fill="var(--logo-ink)"/><path d="M32 56C44 54 55 44 56 26C45 28 35 38 32 56Z" fill="var(--logo-ink)"/><path d="M32 50C25 42 24 30 32 18C40 30 39 42 32 50Z" fill="var(--logo-light)"/><circle cx="32" cy="9" r="4.5" fill="var(--logo-light)"/></g><g transform="translate(80 11.55) scale(1.15)"><g transform="translate(0 0)" fill="none" stroke="var(--logo-ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.5 18C16.5 15.5 14 14.5 10.5 14.5 6 14.5 3.5 17 3.5 20.2 3.5 23.8 7 25 10.8 26 15 27.2 18 28.8 18 32.8 18 36.8 14.5 39 10.3 39 6.5 39 4 37.4 2.5 34.8"/></g><g transform="translate(24.5 0)" fill="none" stroke="var(--logo-ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 5.5V32.5C6.5 36.8 8.6 39 12 39 13.6 39 15 38.6 16 38"/><path d="M1.5 15H14.5"/></g><g transform="translate(45.0 0)"><circle cx="13" cy="27" r="12" fill="none" stroke="var(--logo-ink)" stroke-width="5"/><path d="M5.5 29a7.5 7.5 0 0 1 15 0z" fill="var(--logo-light)"/></g><g transform="translate(74.5 0)" fill="none" stroke="var(--logo-ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 15V50"/><path d="M3.5 27a11.5 12 0 1 0 23 0a11.5 12 0 1 0-23 0"/></g><g transform="translate(115.5 0)" fill="none" stroke="var(--logo-ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.5 18C16.5 15.5 14 14.5 10.5 14.5 6 14.5 3.5 17 3.5 20.2 3.5 23.8 7 25 10.8 26 15 27.2 18 28.8 18 32.8 18 36.8 14.5 39 10.3 39 6.5 39 4 37.4 2.5 34.8"/></g><g transform="translate(140.0 0)" fill="none" stroke="var(--logo-ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 5.5V32.5C6.5 36.8 8.6 39 12 39 13.6 39 15 38.6 16 38"/><path d="M1.5 15H14.5"/></g><g transform="translate(160.5 0)" fill="none" stroke="var(--logo-ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 39V15"/><path d="M3.5 25.5C5.2 18.5 9.5 14.8 16.5 15.2"/></g><g transform="translate(182.0 0)" fill="none" stroke="var(--logo-ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 27H22.5C22.5 20 18.4 15 12.8 15 6.8 15 2.5 20.2 2.5 27 2.5 33.8 7 39 13.5 39 17.3 39 20.3 37.5 22.3 35"/></g><g transform="translate(210.5 0)" fill="none" stroke="var(--logo-ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.5 18C16.5 15.5 14 14.5 10.5 14.5 6 14.5 3.5 17 3.5 20.2 3.5 23.8 7 25 10.8 26 15 27.2 18 28.8 18 32.8 18 36.8 14.5 39 10.3 39 6.5 39 4 37.4 2.5 34.8"/></g><g transform="translate(235.0 0)" fill="none" stroke="var(--logo-ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.5 18C16.5 15.5 14 14.5 10.5 14.5 6 14.5 3.5 17 3.5 20.2 3.5 23.8 7 25 10.8 26 15 27.2 18 28.8 18 32.8 18 36.8 14.5 39 10.3 39 6.5 39 4 37.4 2.5 34.8"/></g></g></svg></h1>
+    <p>Des exercices courts pour faire redescendre le stress et l'anxiété. Choisissez-en un, installez-vous et laissez-vous guider.</p>
+  </header>
+
+  <div class="quick">
+    <span><strong>Besoin de calme tout de suite ?</strong> Deux ou trois soupirs physiologiques suffisent souvent à relâcher la pression.</span>
+    <button class="btn" data-start="soupir">Commencer (1 min)</button>
+  </div>
+
+  <section class="group">
+    <h2>Respiration</h2>
+    <div class="list" id="l-resp"></div>
+  </section>
+  <section class="group">
+    <h2>Séances audio</h2>
+    <div class="list" id="l-audio"></div>
+  </section>
+  <section class="group">
+    <h2>Ancrage et corps</h2>
+    <div class="list" id="l-corps"></div>
+  </section>
+
+  <footer>Ces exercices aident à gérer le stress du quotidien, ils ne remplacent pas un suivi. Si l'anxiété devient envahissante, parlez-en à un médecin. En Suisse, La Main Tendue répond au 143 ; en France, le 3114, 24h/24.</footer>
+</div>
+
+<div id="player" hidden>
+  <div class="ptop">
+    <h2 id="pTitle"></h2>
+    <div class="controls">
+      <button class="btn ghost" id="sound" aria-pressed="false">Son : non</button>
+      <button class="btn ghost" id="close">Fermer</button>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="orb" aria-hidden="true"><div class="ring"></div><div class="core" id="core"></div><div class="num" id="num"></div></div>
+    <p class="phase" id="phase" aria-live="polite"></p>
+    <p class="sub" id="sub"></p>
+    <div class="bar" id="bar"><i id="prog"></i></div>
+    <div class="durs" id="durs"></div>
+    <div class="chaps" id="chaps" hidden></div>
+    <div class="controls" id="ctrl">
+      <button class="btn ghost" id="back15" hidden aria-label="Reculer de 15 secondes">−15 s</button>
+      <button class="btn" id="play">Commencer</button>
+      <button class="btn ghost" id="fwd15" hidden aria-label="Avancer de 15 secondes">+15 s</button>
+      <button class="btn ghost" id="skip" hidden>Étape suivante</button>
+    </div>
+    <audio id="aud" preload="metadata"></audio>
+  </div>
+</div>
+
+<script>
+const IN=1, OUT=.45;
+const EX={
+  coherence:{cat:"resp",t:"Cohérence cardiaque",d:"Inspirez 5 s par le nez, expirez 4 s par la bouche. À pratiquer 3 fois par jour, 5 minutes.",
+    cycle:[["Inspirez","Par le nez, le ventre se gonfle",5,IN],["Expirez","Doucement, par la bouche",4,OUT]],durs:[3,5,10],def:5},
+  carree:{cat:"resp",t:"Respiration carrée",d:"Quatre temps égaux. Utilisée pour garder la tête froide sous pression.",
+    cycle:[["Inspirez","",4,IN],["Retenez","Poumons pleins, épaules relâchées",4,IN],["Expirez","",4,OUT],["Retenez","Poumons vides, sans forcer",4,OUT]],durs:[2,4,6],def:4},
+  r478:{cat:"resp",t:"Respiration 4‑7‑4",d:"Une pause poumons pleins, puis une expiration douce par la bouche. Idéale avant de dormir.",
+    cycle:[["Inspirez","Par le nez",4,IN],["Retenez","",7,IN],["Expirez","Par la bouche, en soufflant doucement",4,OUT]],durs:[1,2,4],def:2},
+  soupir:{cat:"resp",t:"Soupir physiologique",d:"Deux inspirations rapprochées puis une expiration par la bouche. Le moyen le plus rapide de relâcher la tension.",
+    cycle:[["Inspirez","Par le nez",2,.85],["Encore un peu","Une petite inspiration de plus",1,IN],["Expirez","Par la bouche, en relâchant tout",4,OUT]],durs:[1,2,3],def:1},
+  ancrage:{cat:"corps",t:"Ancrage 5‑4‑3‑2‑1",d:"Ramenez votre attention dans l'instant présent par les cinq sens. Utile quand les pensées s'emballent.",
+    steps:[["5 choses que vous voyez","Nommez-les mentalement, une par une. Prenez le temps de regarder les détails.",30],
+      ["4 choses que vous touchez","Le tissu de vos vêtements, le sol sous vos pieds, la chaise…",25],
+      ["3 sons que vous entendez","Proches ou lointains. Ne les jugez pas, écoutez-les simplement.",25],
+      ["2 odeurs","Si vous n'en sentez pas, pensez à deux odeurs que vous aimez.",20],
+      ["1 goût","Le goût dans votre bouche en ce moment, ou un goût que vous appréciez.",15],
+      ["Respirez","Une grande inspiration, une longue expiration. Vous êtes ici, maintenant.",10]]},
+  muscles:{cat:"corps",t:"Relâchement musculaire",d:"Méthode de Jacobson : contracter 5 secondes puis relâcher, groupe par groupe. Fait fondre les tensions physiques.",
+    groups:["les mains (serrez les poings)","les bras (pliez les coudes)","les épaules (remontez-les vers les oreilles)","le visage (plissez les yeux, serrez les mâchoires)","le ventre (rentrez-le fort)","les jambes (tendez-les)","les pieds (recroquevillez les orteils)"]},
+  scan:{cat:"corps",t:"Scan corporel",d:"Parcourez votre corps avec votre attention, de la tête aux pieds, sans rien changer.",
+    steps:[["Installez-vous","Fermez les yeux si vous le souhaitez. Laissez votre respiration se faire toute seule.",20],
+      ["Le visage","Le front, les yeux, la mâchoire. Laissez-les se détendre.",30],
+      ["Le cou et les épaules","Remarquez les tensions. À chaque expiration, laissez-les descendre.",30],
+      ["La poitrine et le ventre","Sentez-les se soulever et redescendre.",30],
+      ["Les bras et les mains","Lourds, posés, sans effort.",30],
+      ["Le dos","Du haut vers le bas, vertèbre par vertèbre.",30],
+      ["Les jambes et les pieds","Le contact avec le sol. Ils vous portent.",30],
+      ["Le corps entier","Une dernière respiration en sentant tout votre corps d'un coup.",20]]}
+};
+EX.audio1={cat:"audio",t:"Scan corporel guidé",d:"Trois passages de la tête aux pieds, de plus en plus lents, pour relâcher les tensions et prendre de la distance avec la douleur. Avec sous-titres.",
+  audio:"audio/stress.mp3",dur:682,
+  chapters:[[0, "Installation", "Installez-vous, assis ou allongé."], [52, "Regard et respiration", "Inspirez par le nez, expirez par la bouche."], [103, "Les sons, les pensées", "Laissez-les aller et venir."], [154, "Ressentir son corps", "Observez, sans juger."], [262, "Premier scan, rapide", "De la tête aux orteils, en 10 à 15 secondes."], [329, "Deuxième scan, plus lent", "Descendez doucement, partie par partie."], [441, "Dernier scan, très lent", "N'oubliez pas les petites zones."], [587, "Retour", "Revenez doucement à la pièce."], [613, "Ce que vous ressentez", "Remarquez comment vous vous sentez maintenant."]],
+  cues:[[3, "Prenez un moment pour vous installer confortablement."], [16, "Vous pouvez rester assis ou allongés."], [20, "Si vous ressentez une douleur qui vous empêche de vous asseoir, n'hésitez surtout pas à vous allonger."], [30, "Le risque, c'est de se laisser absorber par ses pensées."], [33, "Essayez autant que possible d'effectuer un scan régulier en descendant à vitesse constante de la tête aux pieds."], [41, "Je vais vous guider à chaque étape."], [52, "Nous allons commencer en gardant les yeux ouverts."], [55, "Ayez le regard détendu."], [58, "Ne fixez pas d'objet en particulier."], [60, "Embrassez tout l'espace qui vous entoure."], [64, "Tout en gardant le regard détendu, on respire profondément."], [68, "On inspire par le nez et on expire par la bouche."], [77, "À chaque inspiration, profitez de l'air frais qui entre dans votre corps."], [82, "Et à chaque expiration, sentez comme votre corps commence à s'enfoncer dans le siège ou dans le sol en dessous de vous."], [96, "Prenez un moment pour faire une pause et profiter de cette sensation."], [103, "Si vous le souhaitez, vous pouvez doucement fermer les yeux."], [109, "Laissez votre respiration revenir à son rythme naturel."], [114, "Profitez de la sensation d'être immobile."], [124, "Prenez un instant pour remarquer les sons qui vous entourent et la résistance de votre esprit par rapport à ces sons."], [134, "Autant que possible, laissez-les aller et venir."], [136, "Tout comme vous laissez vos pensées aller et venir."], [154, "Portez votre attention sur votre corps."], [158, "Avant de commencer le scan corporel, essayez de remarquer comment votre corps se sent dans sa globalité aujourd'hui."], [167, "Est-ce que vous éprouvez une sensation de tranquillité et de calme ?"], [171, "Ou est-ce que vous sentez que votre corps est nerveux et agité ?"], [183, "Est-ce que vous ressentez une sensation de lourdeur et de léthargie ?"], [191, "Ou est-ce que votre corps semble très léger ?"], [202, "Tandis que vous observez ces sensations, commencez à porter votre attention sur la respiration et son mouvement."], [217, "Restez détendu."], [221, "Notez à quel endroit de votre corps se manifeste la sensation de montée et de descente."], [230, "Si vous ne sentez rien, placez doucement votre main sur votre ventre pour sentir le mouvement de montée et de descente."], [255, "Laissez votre corps et votre esprit se détendre."], [262, "Nous allons maintenant porter notre attention sur le sommet de notre crâne et commencer lentement notre scan corporel."], [274, "Nous allons le faire plusieurs fois."], [277, "La première fois, nous allons le faire de manière assez rapide."], [283, "Prenez 10 ou 15 secondes pour parcourir votre corps."], [289, "Cela va vous permettre d'avoir une vue d'ensemble et de remarquer les endroits qui sont particulièrement inconfortables ou ceux qui sont vraiment détendus."], [298, "Ne restez pas bloqué à un endroit en particulier."], [300, "Continuez le scan jusqu'aux orteils."], [329, "Revenez ensuite au sommet du crâne."], [332, "Et cette fois-ci, descendez deux fois plus doucement pendant 40 secondes environ."], [339, "Je vais vous guider."], [343, "Effectuez votre scan corporel vers le bas de manière un peu plus détaillée tout en restant détendu."], [352, "Commencez à remarquer chaque partie de votre corps,"], [391, "celles qui sont un peu tendues et c'est important de noter aussi celles qui sont détendues"], [404, "et apaisées."], [414, "Poursuivez votre descente jusqu'au bas de votre corps."], [423, "Ne réfléchissez pas à propos de ces sensations."], [426, "Remarquez-les simplement."], [433, "Descendez jusqu'aux pieds et aux orteils."], [441, "Revenez ensuite au sommet du crâne pour effectuer un dernier scan corporel."], [447, "Cette fois, descendez encore deux fois plus doucement."], [454, "Essayez de porter votre attention sur les parties de votre corps qui auraient pu être laissées de côté les fois précédentes."], [461, "Les parties les plus petites comme les oreilles, les doigts, les orteils ou bien certaines zones des bras et des jambes."], [474, "Ne focalisez pas votre attention sur une seule sensation ou un seul endroit en particulier."], [482, "Prenez le temps d'observer votre corps tout entier."], [499, "Ne réfléchissez pas à propos de ce que vous éprouvez ou ressentez."], [505, "Observez."], [547, "Poursuivez votre scan corporel jusqu'au bas de votre corps."], [570, "Descendez de manière lente et régulière jusqu'à vos pieds et vos orteils."], [587, "Maintenant, ramenez tranquillement votre attention vers votre corps, vers la sensation de contact avec le siège ou avec le sol en dessous de vous,"], [599, "vers les sons qui vous entourent."], [603, "Et quand vous vous sentirez prêt, vous pourrez doucement ouvrir les yeux."], [613, "Prenez un moment pour remarquer comment vous vous sentez dans votre corps et votre esprit."], [621, "Prenez également un instant pour noter ce que vous ressentez en ayant installé une plus grande distance entre vous et la douleur."], [630, "Au fil du temps, avec un peu de pratique, vous pourrez vous concentrer sur certaines parties de votre corps et commencer à remarquer la forme,"], [639, "la température et la nature de votre douleur."], [644, "Il est possible de créer beaucoup d'espace dans l'esprit pour que la douleur puisse poursuivre son cheminement sans que l'on y consacre trop d'attention."], [658, "J'espère que vous aurez trouvé cet exercice utile."], [661, "Si vous vous y entraînez avec régularité, cela pourrait vous aider à soulager les tensions qui s'accumulent dans votre corps et votre esprit,"], [667, "mais cela pourrait aussi modifier votre rapport à la douleur."]]};
+// La relaxation musculaire se transforme en étapes
+EX.muscles.steps=EX.muscles.groups.flatMap(g=>[["Contractez",g,5,"c"],["Relâchez","Sentez la différence, laissez la chaleur s'installer",12,"r"]]);
+
+const fmt=s=>{s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
+function totalSteps(e){return e.steps.reduce((a,s)=>a+s[2],0)}
+function card(id){const e=EX[id];const b=document.createElement("button");b.className="ex";b.dataset.start=id;
+  const m=e.audio?`Audio · ${Math.round(e.dur/60)} min · ${e.chapters.length} parties`:e.cycle?`${e.cycle.map(c=>c[2]).join("‑")} s · ${e.def} min`:`${Math.round(totalSteps(e)/60)||1} min · ${e.steps.length} étapes`;
+  b.innerHTML=`<span class="t">${e.t}</span><span class="d">${e.d}</span><span class="m">${m}</span>`;return b}
+Object.keys(EX).forEach(id=>document.getElementById("l-"+EX[id].cat).appendChild(card(id)));
+
+const $=id=>document.getElementById(id);
+let cur=null, plan=[], mins=0, running=false, raf=0, idx=0, phaseStart=0, total=0, elapsedBefore=0, scale=OUT, fromScale=OUT, wake=null, audio=null, sound=false;
+
+function buildPlan(e){
+  if(e.cycle){const per=e.cycle.reduce((a,c)=>a+c[2],0);const n=Math.max(1,Math.round(mins*60/per));
+    plan=[];for(let i=0;i<n;i++)e.cycle.forEach(c=>plan.push({l:c[0],s:c[1],d:c[2],to:c[3]}));}
+  else plan=e.steps.map(s=>({l:s[0],s:s[1],d:s[2],to:s[3]==="c"?.6:s[3]==="r"?.9:.75}));
+  total=plan.reduce((a,p)=>a+p.d,0);
+}
+function open(id){
+  cur=EX[id];stop();$("pTitle").textContent=cur.t;
+  const isA=!!cur.audio;["chaps","back15","fwd15"].forEach(k=>$(k).hidden=!isA);$("sound").hidden=isA;$("bar").classList.toggle("seek",isA);
+  if(isA){$("durs").hidden=true;$("skip").hidden=true;openAudio();$("home").hidden=true;$("player").hidden=false;$("play").focus();return}
+  aud.pause();
+  const durs=$("durs");durs.innerHTML="";
+  if(cur.cycle){mins=cur.def;cur.durs.forEach(m=>{const b=document.createElement("button");b.textContent=m+" min";b.id="d"+m;
+    b.setAttribute("aria-pressed",m===mins);b.onclick=()=>{mins=m;[...durs.children].forEach(x=>x.setAttribute("aria-pressed",x===b));buildPlan(cur);idle()};durs.appendChild(b)})}
+  buildPlan(cur);idle();
+  $("home").hidden=true;$("player").hidden=false;$("play").focus();
+}
+function idle(){
+  $("phase").textContent="Prêt·e ?";$("sub").textContent=cur.cycle?"Installez-vous confortablement, le dos droit. Suivez le cercle : il grandit quand vous inspirez, il rétrécit quand vous expirez.":"Installez-vous confortablement. Chaque étape avance toute seule, ou passez à la suivante quand vous le souhaitez.";
+  $("num").textContent=fmt(total);$("prog").style.width="0";$("durs").hidden=!cur.cycle;$("play").textContent="Commencer";$("play").hidden=false;$("skip").hidden=true;
+  setScale(cur.cycle?OUT:.75);
+}
+function setScale(s){scale=s;$("core").style.transform=`scale(${s})`}
+// Mélodie douce : notes de la gamme pentatonique, attaque lente, son feutré et léger écho
+let bus=null;
+function getBus(){if(bus)return bus;const lp=audio.createBiquadFilter();lp.type="lowpass";lp.frequency.value=1600;
+  const d=audio.createDelay();d.delayTime.value=.34;const fb=audio.createGain();fb.gain.value=.35;const wet=audio.createGain();wet.gain.value=.35;
+  lp.connect(audio.destination);lp.connect(d);d.connect(fb);fb.connect(d);d.connect(wet);wet.connect(audio.destination);return bus=lp}
+function note(f,t,dur,vol){const o=audio.createOscillator(),o2=audio.createOscillator(),g=audio.createGain(),g2=audio.createGain();
+  o.type="sine";o2.type="sine";o.frequency.value=f;o2.frequency.value=f*2;g2.gain.value=.12;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.3);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g);o2.connect(g2);g2.connect(g);g.connect(getBus());o.start(t);o2.start(t);o.stop(t+dur+.1);o2.stop(t+dur+.1)}
+const MEL={in:[261.63,329.63,392],out:[392,329.63,261.63],hold:[293.66],end:[261.63,329.63,392,523.25]};
+function chime(k){if(!sound||!audio)return;const t=audio.currentTime+.02;MEL[k].forEach((f,i)=>note(f,t+i*.38,2.8,.045))}
+function enter(i){
+  idx=i;phaseStart=performance.now();fromScale=scale;const p=plan[i];
+  $("phase").textContent=p.l;$("sub").textContent=p.s;chime(p.to===IN?"in":p.to===OUT?"out":"hold");
+}
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+function tick(now){
+  if(!running)return;const p=plan[idx];const t=(now-phaseStart)/1000;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  setScale(fromScale+(p.to-fromScale)*(reduce?1:ease(Math.min(1,t/p.d))));
+  const el=elapsedBefore+Math.min(t,p.d);
+  $("num").textContent=cur.cycle?Math.max(1,Math.ceil(p.d-t)):fmt(total-el);
+  $("prog").style.width=(el/total*100)+"%";
+  if(t>=p.d){elapsedBefore+=p.d;if(idx+1<plan.length)enter(idx+1);else return finish()}
+  raf=requestAnimationFrame(tick);
+}
+async function start(){
+  if(sound&&!audio)try{audio=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}
+  running=true;elapsedBefore=0;$("durs").hidden=true;$("play").textContent="Arrêter";$("skip").hidden=!!cur.cycle;
+  try{wake=await navigator.wakeLock?.request("screen")}catch(e){}
+  enter(0);raf=requestAnimationFrame(tick);
+}
+function stop(){running=false;cancelAnimationFrame(raf);try{wake?.release()}catch(e){}wake=null}
+function finish(){
+  stop();chime("end");$("phase").textContent="Terminé";
+  $("sub").textContent="Prenez un instant pour remarquer comment vous vous sentez maintenant, par rapport au début.";
+  $("num").textContent="✓";$("prog").style.width="100%";$("play").textContent="Recommencer";$("skip").hidden=true;setScale(.75);
+}
+// ---- Séances audio ----
+const aud=$("aud"); let actx=null, an=null, abuf=null, araf=0;
+const POSKEY="stopstress-pos-";
+function cueAt(t){let c=null;for(const q of cur.cues||[])if(t>=q[0])c=q;return c}
+function chapAt(t){let c=cur.chapters[0];for(const ch of cur.chapters)if(t>=ch[0])c=ch;return c}
+function openAudio(){
+  if(aud.getAttribute("src")!==cur.audio){aud.src=cur.audio;
+    let p=0;try{p=+localStorage.getItem(POSKEY+cur.audio)||0}catch(e){}
+    if(p>5&&p<cur.dur-10)aud.addEventListener("loadedmetadata",()=>{aud.currentTime=p;audUI()},{once:true});}
+  const ch=$("chaps");ch.innerHTML="";
+  cur.chapters.forEach(c=>{const b=document.createElement("button");b.innerHTML=`<b>${fmt(c[0])}</b>${c[1]}`;
+    b.onclick=()=>{aud.currentTime=c[0];audUI();if(aud.paused)playAudio()};ch.appendChild(b)});
+  setScale(.6);audUI();
+}
+function audDur(){return isFinite(aud.duration)&&aud.duration>0?aud.duration:cur.dur}
+function audUI(){
+  if(!cur||!cur.audio)return;const t=aud.currentTime||0,c=chapAt(t);
+  $("phase").textContent=t<1&&aud.paused?"Prêt·e ?":c[1];
+  const sb=$("sub");if(t<1&&aud.paused){sb.textContent="Installez-vous, mettez des écouteurs si possible, puis lancez l'écoute.";sb.classList.remove("cue")}
+  else{const q=cueAt(t);const live=q&&t<q[0]+3+q[1].length/12;sb.textContent=live?(/^[a-zà-ÿ]/.test(q[1])?"… "+q[1]:q[1]):c[2];sb.classList.toggle("cue",!!live)}
+  $("num").textContent=fmt(audDur()-t);$("prog").style.width=(t/audDur()*100)+"%";
+  [...$("chaps").children].forEach((b,i)=>b.setAttribute("aria-current",cur.chapters[i]===c));
+  $("play").textContent=aud.paused?(t>1?"Reprendre":"Écouter"):"Pause";
+}
+function playAudio(){
+  try{if(!actx){actx=new (window.AudioContext||window.webkitAudioContext)();an=actx.createAnalyser();an.fftSize=512;
+      actx.createMediaElementSource(aud).connect(an);an.connect(actx.destination);abuf=new Uint8Array(an.fftSize)}
+    actx.resume()}catch(e){an=null}
+  aud.play().catch(()=>{$("sub").textContent="Impossible de lancer l'audio. Touchez Écouter pour réessayer."});
+}
+function orbLoop(){
+  if(aud.paused)return;let lvl=0;
+  if(an){an.getByteTimeDomainData(abuf);let s=0;for(const v of abuf){const d=(v-128)/128;s+=d*d}lvl=Math.min(1,Math.sqrt(s/abuf.length)*6)}
+  const breath=.62+.08*Math.sin(performance.now()/1000*Math.PI/5); // cycle lent de 10 s
+  const target=matchMedia("(prefers-reduced-motion: reduce)").matches?.7:breath+lvl*.25;
+  setScale(scale+(target-scale)*.08);araf=requestAnimationFrame(orbLoop);
+}
+let lastSave=0;
+aud.addEventListener("timeupdate",()=>{audUI();if(Date.now()-lastSave>3000){lastSave=Date.now();try{localStorage.setItem(POSKEY+cur.audio,aud.currentTime)}catch(e){}}});
+aud.addEventListener("play",async()=>{audUI();cancelAnimationFrame(araf);orbLoop();try{wake=await navigator.wakeLock?.request("screen")}catch(e){}});
+aud.addEventListener("pause",()=>{audUI();try{wake?.release()}catch(e){}wake=null});
+aud.addEventListener("ended",()=>{try{localStorage.removeItem(POSKEY+cur.audio)}catch(e){}finish();$("play").textContent="Réécouter"});
+$("back15").onclick=()=>{aud.currentTime=Math.max(0,aud.currentTime-15);audUI()};
+$("fwd15").onclick=()=>{aud.currentTime=Math.min(audDur()-1,aud.currentTime+15);audUI()};
+$("bar").onclick=e=>{if(!cur||!cur.audio)return;const r=e.currentTarget.getBoundingClientRect();aud.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*audDur();audUI()};
+$("play").onclick=()=>{if(cur.audio){if(aud.paused){if(aud.ended)aud.currentTime=0;playAudio()}else aud.pause();return}
+  if(running){stop();idle()}else start()};
+$("skip").onclick=()=>{if(!running)return;elapsedBefore+=plan[idx].d;if(idx+1<plan.length)enter(idx+1);else finish()};
+$("close").onclick=()=>{stop();aud.pause();$("player").hidden=true;$("home").hidden=false};
+$("sound").onclick=e=>{sound=!sound;e.target.setAttribute("aria-pressed",sound);e.target.textContent="Son : "+(sound?"oui":"non");
+  if(sound&&!audio)try{audio=new (window.AudioContext||window.webkitAudioContext)()}catch(err){}};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-start]");if(b)open(b.dataset.start)});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("player").hidden)$("close").click()});
+</script>
+
+
+</body></html>
